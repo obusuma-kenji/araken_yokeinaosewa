@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>あらけんのよけいなお世話｜3分改善提案</title>
+  <meta name="description" content="たった3分で、あなたの発信の『もったいない』を1点だけ直す。Vチューバー方式の改善フィードバック。" />
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.09);
+      --stroke: rgba(255,255,255,.12);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.74);
+      --muted2: rgba(234,240,255,.58);
+      --accent:#7C3AED; /* violet */
+      --accent2:#22D3EE; /* cyan */
+      --warn:#FBBF24; /* amber */
+      --ok:#34D399; /* emerald */
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 20px;
+      --radius2: 28px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+                   "Hiragino Kaku Gothic ProN","Noto Sans JP", sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 15% 10%, rgba(124,58,237,.35), transparent 60%),
+                  radial-gradient(900px 520px at 85% 18%, rgba(34,211,238,.25), transparent 60%),
+                  radial-gradient(900px 520px at 55% 95%, rgba(251,191,36,.12), transparent 60%),
+                  var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 0 20px; }
+
+    /* subtle grain */
+    .grain:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.35;
+    }
+
+    /* topbar */
+    .topbar{
+      position: sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,18,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar .inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+    .logo{
+      width:34px; height:34px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,1));
+      box-shadow: 0 10px 30px rgba(124,58,237,.25), 0 10px 30px rgba(34,211,238,.18);
+    }
+    .nav{
+      display:flex; gap:16px; align-items:center;
+      color: var(--muted);
+      font-size: 13px;
+      white-space:nowrap;
+    }
+    .nav a{ opacity:.9; }
+    .nav a:hover{ opacity:1; color: var(--text); }
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.65));
+      box-shadow: 0 18px 50px rgba(124,58,237,.22);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .cta:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .cta.secondary{
+      background: rgba(255,255,255,.06);
+      box-shadow:none;
+    }
+
+    /* hero */
+    .hero{
+      padding: 56px 0 18px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+    .heroCard{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(800px 340px at 10% 10%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(700px 300px at 80% 20%, rgba(34,211,238,.16), transparent 60%),
+        rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      padding: 34px 34px 30px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .kdot{
+      width:8px; height:8px; border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 24px rgba(124,58,237,.55);
+    }
+    h1{
+      margin: 16px 0 12px;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 54ch;
+    }
+    .badges{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin: 16px 0 22px;
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.11);
+      color: rgba(234,240,255,.85);
+      font-size: 13px;
+    }
+    .heroActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    .sideStack{
+      display:grid; gap: 16px;
+    }
+    .miniCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 18px 18px 16px;
+    }
+    .miniTitle{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 850;
+      letter-spacing: .01em;
+      margin-bottom: 6px;
+    }
+    .pill{
+      font-size: 12px;
+      color: rgba(234,240,255,.78);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(255,255,255,.05);
+    }
+    .miniDesc{ color: var(--muted); font-size: 13px; margin: 0; }
+
+    /* sections */
+    section{ padding: 26px 0; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px;
+      margin: 26px 0 16px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height:1.6;
+      max-width: 46ch;
+    }
+
+    /* demo video */
+    #demo{
+      padding: 10px 0 26px;
+    }
+
+    .videoWrap{
+      margin-top: 14px;
+    }
+
+    .videoCard{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(800px 360px at 15% 15%, rgba(124,58,237,.18), transparent 60%),
+        rgba(255,255,255,.05);
+      box-shadow: 0 22px 60px rgba(0,0,0,.55);
+      padding: 16px;
+    }
+
+    .videoFrame{
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #000;
+    }
+
+    .videoFrame video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+    }
+
+    .videoMeta{
+      padding: 6px 10px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .videoMeta h3{
+      margin: 10px 0 8px;
+      font-size: 18px;
+      letter-spacing: -.01em;
+    }
+
+    .videoMeta p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* audio player */
+    #audioSamples{
+      padding: 26px 0;
+    }
+
+    .audioGrid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .audioCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+      transition: all .2s ease;
+    }
+
+    .audioCard:hover{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.15);
+    }
+
+    .audioTitle{
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .audioControls{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .playBtn{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124,58,237,.85), rgba(34,211,238,.55));
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .2s ease;
+      flex-shrink: 0;
+    }
+
+    .playBtn:hover{
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+
+    .playBtn svg{
+      width: 16px;
+      height: 16px;
+      fill: var(--text);
+    }
+
+    .progressWrap{
+      flex: 1;
+    }
+
+    .progressBar{
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,.1);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progressFill{
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    .timeDisplay{
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted2);
+      margin-top: 6px;
+    }
+
+    /* bento cards */
+    .bento{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .tile{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+      min-height: 120px;
+    }
+    .tile h3{ margin:0 0 8px; font-size: 16px; letter-spacing:-.01em; }
+    .tile p{ margin:0; color: var(--muted); font-size: 13px; line-height:1.75; }
+    .tile .tag{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size: 12px;
+      color: rgba(234,240,255,.82);
+      margin-bottom: 10px;
+      opacity:.95;
+    }
+    .tile .tag .dot{
+      width:6px; height:6px; border-radius:99px; background: var(--warn);
+      box-shadow: 0 0 18px rgba(251,191,36,.35);
+    }
+    .tile.big{ grid-column: span 7; }
+    .tile.med{ grid-column: span 5; }
+    .tile.half{ grid-column: span 6; }
+
+    /* steps */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .step{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+    }
+    .stepTop{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom: 10px;
+    }
+    .num{
+      width:32px; height:32px; border-radius: 12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      background: rgba(124,58,237,.25);
+      border: 1px solid rgba(124,58,237,.40);
+      color: rgba(234,240,255,.95);
+    }
+
+    /* deliverables */
+    .checklist{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .check{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 14px 14px;
+      display:flex; gap:10px; align-items:flex-start;
+      color: rgba(234,240,255,.90);
+      font-size: 13px;
+      line-height:1.6;
+    }
+    .tick{
+      width:20px; height:20px; border-radius: 8px;
+      background: rgba(52,211,153,.18);
+      border: 1px solid rgba(52,211,153,.45);
+      display:inline-flex; align-items:center; justify-content:center;
+      margin-top: 1px;
+      flex: 0 0 auto;
+    }
+    .tick svg{ width:14px; height:14px; }
+
+    /* pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .priceMain{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 380px at 20% 10%, rgba(124,58,237,.26), transparent 58%),
+        radial-gradient(700px 320px at 90% 30%, rgba(34,211,238,.18), transparent 62%),
+        rgba(255,255,255,.05);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .priceRow{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-top: 8px;
+    }
+    .planName{ font-weight: 900; font-size: 18px; letter-spacing:-.01em; }
+    .price{
+      font-weight: 950;
+      font-size: 40px;
+      letter-spacing: -0.02em;
+      margin: 10px 0 8px;
+    }
+    .yen{ font-size: 16px; opacity:.85; margin-left: 6px; font-weight: 800; }
+    .small{ color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+    .bullets{ margin: 12px 0 0; padding:0; list-style:none; display:grid; gap:10px; }
+    .bullets li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: rgba(234,240,255,.86);
+      font-size: 13px;
+      line-height:1.6;
+    }
+    .bullets li .miniDot{
+      width:10px; height:10px; border-radius: 999px;
+      margin-top: 6px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 18px rgba(124,58,237,.35);
+      flex:0 0 auto;
+    }
+    .sideInfo{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+    }
+
+    /* faq */
+    .faq{
+      display:grid; gap:12px;
+    }
+    details{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 14px 14px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-weight: 850;
+      color: rgba(234,240,255,.92);
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .ans{ color: var(--muted); font-size: 13px; line-height:1.75; margin-top: 10px; }
+
+    /* final cta */
+    .final{
+      margin: 30px 0 72px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 420px at 20% 10%, rgba(34,211,238,.18), transparent 62%),
+        radial-gradient(900px 420px at 85% 10%, rgba(124,58,237,.25), transparent 60%),
+        rgba(255,255,255,.05);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .final h2{ margin:0; font-size: 22px; letter-spacing:-.01em; }
+    .final p{ margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    .foot{
+      padding: 26px 0 40px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(234,240,255,.55);
+      font-size: 12px;
+    }
+
+    /* responsive */
+    @media (max-width: 920px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .videoCard{ grid-template-columns: 1fr; }
+      .audioGrid{ grid-template-columns: 1fr; }
+      .pricing{ grid-template-columns: 1fr; }
+      .steps{ grid-template-columns: 1fr; }
+      .checklist{ grid-template-columns: 1fr; }
+      .tile.big,.tile.med,.tile.half{ grid-column: span 12; }
+      .nav{ display:none; }
+      .final{ flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+
+<body class="grain">
+  <div class="grain"></div>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="wrap">
+      <div class="inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>あらけんのよけいなお世話</div>
+          <span class="pill">3分改善</span>
+        </div>
+        <nav class="nav" aria-label="ページ内ナビ">
+          <a href="#pain">よくある悩み</a>
+          <a href="#demo">実例動画</a>
+          <a href="#how">直し方</a>
+          <a href="#deliver">納品物</a>
+          <a href="#price">料金</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="cta" href="#apply">申し込む</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <div class="kicker"><span class="kdot"></span>悪くないのに伸びない発信を、1点だけ直す</div>
+          <h1>たった3分で、<br>あなたの「もったいない」を直します。</h1>
+          <p class="sub">
+            自己紹介動画・LP・告知文。<br>
+            情報を増やさず、<strong>構成と意味づけ</strong>だけを整えて、<strong>行動される形</strong>にします。
+          </p>
+
+          <div class="badges">
+            <div class="badge">🎥 3分フィードバック動画</div>
+            <div class="badge">📝 台本＋SRT＋VOICEVOX</div>
+            <div class="badge">🚀 そのまま投稿できる</div>
+          </div>
+
+          <div class="heroActions">
+            <a class="cta" href="#apply">今すぐ申し込む</a>
+            <a class="cta secondary" href="#price">料金を見る</a>
+          </div>
+        </div>
+
+        <div class="sideStack">
+          <div class="miniCard">
+            <div class="miniTitle">🎯 直すのは "1つだけ"</div>
+            <p class="miniDesc">情報を盛らない。刺さりを作る原因は、だいたい一点です。</p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">🧪 弱みを「生きた教材」に</div>
+            <p class="miniDesc">言い訳に聞こえる弱みを、哲学を証明する"証拠"に変換します。</p>
+          </div>
+          <div class="miniCard">
+            <div class="miniTitle">🛠 そのまま使える納品</div>
+            <p class="miniDesc">Premiere用SRT／VOICEVOX台本まで渡すので、編集が即終わります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <!-- Pain -->
+    <section id="pain">
+      <div class="sectionTitle">
+        <h2>よくある "もったいない"</h2>
+        <p>ここに当てはまるほど、3分改善の効果が出やすいです。</p>
+      </div>
+
+      <div class="bento">
+        <div class="tile big">
+          <div class="tag"><span class="dot"></span>刺さらない</div>
+          <h3>言ってることは正しいのに、なぜか刺さらない</h3>
+          <p>原因は「情報不足」ではなく、<strong>順番</strong>と<strong>焦点</strong>。視聴者が迷子になるポイントを潰します。</p>
+        </div>
+
+        <div class="tile med">
+          <div class="tag"><span class="dot"></span>動かない</div>
+          <h3>説明したのに、行動されない</h3>
+          <p>CTAが早い／遅い／弱い。感情が動く場所に置き換えるだけで反応が変わります。</p>
+        </div>
+
+        <div class="tile half">
+          <div class="tag"><span class="dot"></span>言い訳化</div>
+          <h3>弱みが"言い訳"に聞こえてしまう</h3>
+          <p>弱みを隠すのではなく、<strong>哲学の証拠</strong>として設計し直します。</p>
+        </div>
+
+        <div class="tile half">
+          <div class="tag"><span class="dot"></span>ズレ</div>
+          <h3>コンセプトと体験が別々に聞こえる</h3>
+          <p>一言のブリッジで「テーマの実例」に変わります。これが最速で効きます。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Video -->
+    <section id="demo">
+      <div class="sectionTitle">
+        <h2>3分改善って、こういうことです</h2>
+        <p>実際のフィードバック例（音声＋テロップ）をご覧ください。</p>
+      </div>
+
+      <div class="videoWrap">
+        <div class="videoCard">
+          <div class="videoFrame">
+            <video controls preload="metadata">
+              <source src="demo_video.mp4" type="video/mp4">
+              お使いのブラウザは動画タグをサポートしていません。
+            </video>
+          </div>
+
+          <div class="videoMeta">
+            <div class="pill">実例</div>
+            <h3>弱みを「生きた教材」に変える3分</h3>
+            <p>
+              ダメ出しはしません。<br>
+              構成と意味づけを直すだけで、<br>
+              受け取られ方が変わるのが分かります。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio Samples -->
+    <section id="audioSamples">
+      <div class="sectionTitle">
+        <h2>🎧 音声サンプル</h2>
+        <p>改善前・改善後の雰囲気を音声でも確認できます。</p>
+      </div>
+
+      <div class="audioGrid">
+        <div class="audioCard">
+          <div class="audioTitle">
+            <span>🎵</span>
+            <span>きれいなあおいろ - 学びの旅</span>
+          </div>
+          <div class="audioControls">
+            <div class="playBtn" onclick="togglePlay('audio1', this)">
+              <svg viewBox="0 0 24 24" class="play-icon">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg viewBox="0 0 24 24" class="pause-icon" style="display:none;">
+                <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+              </svg>
+            </div>
+            <div class="progressWrap">
+              <div class="progressBar" onclick="seek('audio1', event)">
+                <div class="progressFill" id="progress1"></div>
+              </div>
+              <div class="timeDisplay">
+                <span id="current1">0:00</span>
+                <span id="duration1">0:00</span>
+              </div>
+            </div>
+          </div>
+          <audio id="audio1" preload="metadata">
+            <source src="audio1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+
+        <div class="audioCard">
+          <div class="audioTitle">
+            <span>🎤</span>
+            <span>弱みを生きた教材に変える構成</span>
+          </div>
+          <div class="audioControls">
+            <div class="playBtn" onclick="togglePlay('audio2', this)">
+              <svg viewBox="0 0 24 24" class="play-icon">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg viewBox="0 0 24 24" class="pause-icon" style="display:none;">
+                <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+              </svg>
+            </div>
+            <div class="progressWrap">
+              <div class="progressBar" onclick="seek('audio2', event)">
+                <div class="progressFill" id="progress2"></div>
+              </div>
+              <div class="timeDisplay">
+                <span id="current2">0:00</span>
+                <span id="duration2">0:00</span>
+              </div>
+            </div>
+          </div>
+          <audio id="audio2" preload="metadata">
+            <source src="audio2.m4a" type="audio/mp4">
+          </audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- How -->
+    <section id="how">
+      <div class="sectionTitle">
+        <h2>3分で直す"型"</h2>
+        <p>「共感 → 証明 → 行動喚起」。物語のセオリーに沿って並べ替えます。</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="stepTop">
+            <div class="num">1</div>
+            <span class="pill">共感</span>
+          </div>
+          <h3>最初に"あなたの悩み"を代弁する</h3>
+          <p>自分語りより先に、視聴者の頭の中の問いに答えます。</p>
+        </div>
+
+        <div class="step">
+          <div class="stepTop">
+            <div class="num">2</div>
+            <span class="pill">証明</span>
+          </div>
+          <h3>体験を「生きた教材」に変換</h3>
+          <p>弱みを、テーマを証明する"リアルタイムの学び"として位置づけます。</p>
+        </div>
+
+        <div class="step">
+          <div class="stepTop">
+            <div class="num">3</div>
+            <span class="pill">CTA</span>
+          </div>
+          <h3>感情が高い瞬間に、自然に促す</h3>
+          <p>前菜の前に会計しない。納得してから「次へ」を置きます。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deliverables -->
+    <section id="deliver">
+      <div class="sectionTitle">
+        <h2>納品物（即使用）</h2>
+        <p>「直した」だけで終わらせず、編集・投稿まで短縮します。</p>
+      </div>
+
+      <div class="checklist">
+        <div class="check">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L10 17l-5-5" stroke="rgba(52,211,153,1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          改善フィードバック動画（約3分）
+        </div>
+
+        <div class="check">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L10 17l-5-5" stroke="rgba(52,211,153,1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          読み上げ台本（間・感情指示つき）
+        </div>
+
+        <div class="check">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L10 17l-5-5" stroke="rgba(52,211,153,1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          テロップ完全版（SRT／Premiere用）
+        </div>
+
+        <div class="check">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 7L10 17l-5-5" stroke="rgba(52,211,153,1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          VOICEVOX用台本（コピペで音声化）
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="price">
+      <div class="sectionTitle">
+        <h2>料金（迷わせない1プラン）</h2>
+        <p>3分改善に必要なものを全部込み。継続契約・サブスクなし。</p>
+      </div>
+
+      <div class="pricing" id="apply">
+        <div class="priceMain">
+          <div class="priceRow">
+            <div>
+              <div class="planName">スタンダード</div>
+              <div class="small">3分改善フィードバック＋全納品物</div>
+            </div>
+            <div class="pill">おすすめ</div>
+          </div>
+
+          <div class="price">3,300<span class="yen">円（税込）</span></div>
+
+          <ul class="bullets">
+            <li><span class="miniDot"></span> 1コンテンツ（動画 or 文章）を対象に改善</li>
+            <li><span class="miniDot"></span> 「もったいない点」を1点に絞って直す</li>
+            <li><span class="miniDot"></span> 台本／SRT／VOICEVOXまで一式納品</li>
+          </ul>
+
+          <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta" href="#" title="ここを決済リンクに差し替え">この内容で申し込む</a>
+            <a class="cta secondary" href="#faq">不安な点を見る</a>
+          </div>
+        </div>
+
+        <div class="sideInfo">
+          <h3 style="margin:0 0 10px; font-size:16px;">向いている人</h3>
+          <p style="margin:0 0 12px; color:var(--muted); font-size:13px; line-height:1.75;">
+            「改善点を知りたい」「刺さる形に整えたい」人に向いています。
+          </p>
+          <ul class="bullets" style="margin-top:0;">
+            <li><span class="miniDot"></span> 発信を良くしたい</li>
+            <li><span class="miniDot"></span> ダメ出しより改善が欲しい</li>
+            <li><span class="miniDot"></span> 構成と感情設計を整えたい</li>
+          </ul>
+
+          <div style="height:12px"></div>
+
+          <h3 style="margin:0 0 10px; font-size:16px;">向いていない人</h3>
+          <ul class="bullets" style="margin-top:0;">
+            <li><span class="miniDot"></span> 変える気がない</li>
+            <li><span class="miniDot"></span> 褒められたいだけ</li>
+            <li><span class="miniDot"></span> 大量にまとめて直したい</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="sectionTitle">
+        <h2>FAQ</h2>
+        <p>よく聞かれるところだけ先回りで置いておきます。</p>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>動画がなくても申し込めますか？ <span style="opacity:.6">＋</span></summary>
+          <div class="ans">はい。文章（自己紹介文／LP原稿／告知文）でもOKです。対象コンテンツを1つ送ってください。</div>
+        </details>
+
+        <details>
+          <summary>3分で本当に直せるんですか？ <span style="opacity:.6">＋</span></summary>
+          <div class="ans">直すのは「一点」だけだからです。刺さりを作る原因は多くの場合、焦点・順番・意味づけの一点に集約されます。</div>
+        </details>
+
+        <details>
+          <summary>どんな形で納品されますか？ <span style="opacity:.6">＋</span></summary>
+          <div class="ans">フィードバック動画（限定公開URL等）＋台本＋SRT＋VOICEVOX台本を一式でお渡しします。</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section>
+      <div class="final">
+        <div>
+          <h2>その「もったいない」、今日で終わらせませんか？</h2>
+          <p>3分で、あなたの発信は一段上に行きます。</p>
+        </div>
+        <a class="cta" href="#apply">あらけんのよけいなお世話を受ける</a>
+      </div>
+    </section>
+
+    <div class="foot">
+      © あらけんのよけいなお世話
+    </div>
+  </div>
+
+  <script>
+    // Audio Player Functions
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function togglePlay(audioId, btn) {
+      const audio = document.getElementById(audioId);
+      const playIcon = btn.querySelector('.play-icon');
+      const pauseIcon = btn.querySelector('.pause-icon');
+      
+      if (audio.paused) {
+        // Pause all other audios
+        document.querySelectorAll('audio').forEach(a => {
+          if (a.id !== audioId) {
+            a.pause();
+            const otherBtn = a.parentElement.querySelector('.playBtn');
+            if (otherBtn) {
+              otherBtn.querySelector('.play-icon').style.display = 'block';
+              otherBtn.querySelector('.pause-icon').style.display = 'none';
+            }
+          }
+        });
+        
+        audio.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        audio.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      }
+    }
+
+    function seek(audioId, event) {
+      const audio = document.getElementById(audioId);
+      const bar = event.currentTarget;
+      const rect = bar.getBoundingClientRect();
+      const percent = (event.clientX - rect.left) / rect.width;
+      audio.currentTime = percent * audio.duration;
+    }
+
+    // Initialize audio players
+    document.querySelectorAll('audio').forEach((audio, index) => {
+      const num = index + 1;
+      const progressFill = document.getElementById(`progress${num}`);
+      const currentTime = document.getElementById(`current${num}`);
+      const durationTime = document.getElementById(`duration${num}`);
+      const playBtn = audio.parentElement.querySelector('.playBtn');
+
+      audio.addEventListener('loadedmetadata', () => {
+        durationTime.textContent = formatTime(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressFill.style.width = percent + '%';
+          currentTime.textContent = formatTime(audio.currentTime);
+        }
+      });
+
+      audio.addEventListener('ended', () => {
+        playBtn.querySelector('.play-icon').style.display = 'block';
+        playBtn.querySelector('.pause-icon').style.display = 'none';
+        progressFill.style.width = '0%';
+        currentTime.textContent = '0:00';
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
